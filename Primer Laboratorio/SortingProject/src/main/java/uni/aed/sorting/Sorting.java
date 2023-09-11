@@ -34,7 +34,7 @@ public class Sorting {
     public Integer[] bubble(Integer[] arr) {
 
         int n = arr.length;
-        Date initTime = new Date();
+        long initTime=System.nanoTime();
 
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - i - 1; j++) {
@@ -48,14 +48,14 @@ public class Sorting {
                 }
             }
         }
-        Date finalTime = new Date();
-        executionTime = finalTime.getTime() - initTime.getTime();
+        long finalTime =System.nanoTime();
+        executionTime = finalTime - initTime;
         return arr;
     }
     public Integer[] insertion(Integer[] arr) {
         int aux, k;
         boolean sw = false;
-        Date initTime = new Date();
+        long initTime=System.nanoTime();
 
         for (int i = 1; i < arr.length; i++){
             aux = arr[i];
@@ -73,14 +73,14 @@ public class Sorting {
             }
             arr[k+1] = aux;
         }
-        Date finalTime = new Date();
-        executionTime = finalTime.getTime() - initTime.getTime();
+        long finalTime =System.nanoTime();
+        executionTime = finalTime - initTime;
         return arr;
     }
     
     public Integer[] binaryInsertion(Integer[] arr) {
         int aux, p, u, c;
-        Date initTime = new Date();
+        long initTime=System.nanoTime();
         for (int i = 1; i < arr.length; i++) {
             aux = arr[i];
             p = 0;
@@ -98,14 +98,14 @@ public class Sorting {
             numSwaps += i - p;
             arr[p] = aux;
         }
-        Date finalTime = new Date();
-        executionTime = finalTime.getTime() - initTime.getTime();
+        long finalTime =System.nanoTime();
+        executionTime = finalTime - initTime;
         return arr;
     }
     
     
     public Integer[] selection(Integer[] arr) {
-        Date initTime = new Date();
+        long initTime=System.nanoTime();
         for (int i = 0; i < arr.length - 1; i++) {
             int minIndex = i;
             for (int j = i + 1; j < arr.length; j++) {
@@ -121,8 +121,8 @@ public class Sorting {
                 arr[minIndex] = temp;
             }
         }
-        Date finalTime = new Date();
-        executionTime = finalTime.getTime() - initTime.getTime();
+        long finalTime =System.nanoTime();
+        executionTime = finalTime - initTime;
         
         return arr;
     }
@@ -130,10 +130,10 @@ public class Sorting {
     
     
     public Integer[] quickSort(Integer[] arr) {
-        Date initTime = new Date();
+        long initTime=System.nanoTime();
         quickSortHelper(arr, 0, arr.length - 1);
-        Date finalTime = new Date();
-        executionTime = finalTime.getTime() - initTime.getTime();
+        long finalTime =System.nanoTime();
+        executionTime = finalTime - initTime;
         return arr;
     }
 
@@ -171,10 +171,10 @@ public class Sorting {
     
     
     public Integer[] merge(Integer[] arr) {
-        Date initTime = new Date();
+        long initTime=System.nanoTime();
         mergeSortHelper(arr, 0, arr.length - 1);
-        Date finalTime = new Date();
-        executionTime = finalTime.getTime() - initTime.getTime();
+        long finalTime =System.nanoTime();
+        executionTime = finalTime - initTime;
         return arr;
     }
 
@@ -230,7 +230,7 @@ public class Sorting {
     
     public Integer[] heap(Integer[] arr) {
         int n = arr.length;
-        Date initTime = new Date();
+        long initTime=System.nanoTime();
 
         // Build a max-heap
         for (int i = n / 2 - 1; i >= 0; i--) {
@@ -244,8 +244,8 @@ public class Sorting {
             heapify(arr, i, 0);
         }
 
-        Date finalTime = new Date();
-        executionTime = finalTime.getTime() - initTime.getTime();
+        long finalTime =System.nanoTime();
+        executionTime = finalTime - initTime;
         return arr;
     }
 

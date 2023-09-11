@@ -1,7 +1,9 @@
 
 package gui;
 
+import java.util.Random;
 import javax.swing.DefaultListModel;
+import javax.swing.table.DefaultTableModel;
 import uni.aed.sorting.Sorting;
 
 /**
@@ -18,6 +20,12 @@ public class SortJFrame extends javax.swing.JFrame {
         // Setting models for each list
         initialList.setModel(modelList1);
         sortedList.setModel(modelList2);
+        // Setting Layout
+        panelDataInput.removeAll();
+        panelDataInput.add(panelManual);
+        panelDataInput.repaint();
+        panelDataInput.revalidate();
+
     }
 
     /**
@@ -29,11 +37,15 @@ public class SortJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        bttnGroupDataInput = new javax.swing.ButtonGroup();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
         background = new javax.swing.JPanel();
         lbl = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         sortedList = new javax.swing.JList<>();
-        txtValue = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         initialList = new javax.swing.JList<>();
         bttnSort = new javax.swing.JToggleButton();
@@ -47,25 +59,56 @@ public class SortJFrame extends javax.swing.JFrame {
         checkBoxAscending = new javax.swing.JCheckBox();
         lblExecutionTime = new javax.swing.JLabel();
         txtExecutionTime = new javax.swing.JTextField();
+        bttnManualInput = new javax.swing.JRadioButton();
+        lblDataInput = new javax.swing.JLabel();
+        bttnAutomaticInput = new javax.swing.JRadioButton();
+        panelDataInput = new javax.swing.JPanel();
+        panelAutomatic = new javax.swing.JPanel();
+        spinnerMinVal = new javax.swing.JSpinner();
+        spinnerMaxVal = new javax.swing.JSpinner();
+        jLabel1 = new javax.swing.JLabel();
+        lblMax = new javax.swing.JLabel();
+        spinnerNumElements = new javax.swing.JSpinner();
+        jLabel2 = new javax.swing.JLabel();
+        bttnGenerate = new javax.swing.JToggleButton();
+        panelManual = new javax.swing.JPanel();
+        txtValue = new javax.swing.JTextField();
+        lblIntroduceDataPoints = new javax.swing.JLabel();
+        panelTable = new javax.swing.JPanel();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable1);
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane4.setViewportView(jTable2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Bubble Sort Algorithm");
 
         lbl.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lbl.setText("Introduce Values to Sort");
+        lbl.setText("SORTING MACHINE");
 
         jScrollPane1.setViewportView(sortedList);
-
-        txtValue.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtValueActionPerformed(evt);
-            }
-        });
-        txtValue.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtValueKeyTyped(evt);
-            }
-        });
 
         jScrollPane2.setViewportView(initialList);
 
@@ -118,7 +161,7 @@ public class SortJFrame extends javax.swing.JFrame {
             }
         });
 
-        lblExecutionTime.setText("Time of execution");
+        lblExecutionTime.setText("Time of execution (ns)");
 
         txtExecutionTime.setEditable(false);
         txtExecutionTime.addActionListener(new java.awt.event.ActionListener() {
@@ -127,6 +170,146 @@ public class SortJFrame extends javax.swing.JFrame {
             }
         });
 
+        bttnGroupDataInput.add(bttnManualInput);
+        bttnManualInput.setSelected(true);
+        bttnManualInput.setText("Manual");
+        bttnManualInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnManualInputActionPerformed(evt);
+            }
+        });
+
+        lblDataInput.setText("Data input:");
+
+        bttnGroupDataInput.add(bttnAutomaticInput);
+        bttnAutomaticInput.setText("Automatic");
+        bttnAutomaticInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnAutomaticInputActionPerformed(evt);
+            }
+        });
+
+        panelDataInput.setLayout(new java.awt.CardLayout());
+
+        spinnerMaxVal.setValue(10);
+
+        jLabel1.setText("Min. value");
+
+        lblMax.setText("Max. value");
+
+        spinnerNumElements.setValue(8);
+
+        jLabel2.setText("N° elements");
+
+        bttnGenerate.setText("Generate");
+        bttnGenerate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnGenerateActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelAutomaticLayout = new javax.swing.GroupLayout(panelAutomatic);
+        panelAutomatic.setLayout(panelAutomaticLayout);
+        panelAutomaticLayout.setHorizontalGroup(
+            panelAutomaticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAutomaticLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelAutomaticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelAutomaticLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(spinnerNumElements, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bttnGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addGroup(panelAutomaticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAutomaticLayout.createSequentialGroup()
+                        .addComponent(lblMax, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(spinnerMaxVal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAutomaticLayout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(spinnerMinVal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        panelAutomaticLayout.setVerticalGroup(
+            panelAutomaticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAutomaticLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelAutomaticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(spinnerMaxVal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelAutomaticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblMax)
+                        .addComponent(jLabel2)
+                        .addComponent(spinnerNumElements, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(panelAutomaticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelAutomaticLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addGroup(panelAutomaticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(spinnerMinVal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)))
+                    .addGroup(panelAutomaticLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(bttnGenerate)))
+                .addGap(8, 8, 8))
+        );
+
+        panelDataInput.add(panelAutomatic, "card20");
+
+        txtValue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtValueActionPerformed(evt);
+            }
+        });
+        txtValue.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtValueKeyTyped(evt);
+            }
+        });
+
+        lblIntroduceDataPoints.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        lblIntroduceDataPoints.setText("Introduce data points:");
+
+        javax.swing.GroupLayout panelManualLayout = new javax.swing.GroupLayout(panelManual);
+        panelManual.setLayout(panelManualLayout);
+        panelManualLayout.setHorizontalGroup(
+            panelManualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 343, Short.MAX_VALUE)
+            .addGroup(panelManualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelManualLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(lblIntroduceDataPoints, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelManualLayout.createSequentialGroup()
+                    .addContainerGap(124, Short.MAX_VALUE)
+                    .addComponent(txtValue, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(118, 118, 118)))
+        );
+        panelManualLayout.setVerticalGroup(
+            panelManualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 71, Short.MAX_VALUE)
+            .addGroup(panelManualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelManualLayout.createSequentialGroup()
+                    .addGap(12, 12, 12)
+                    .addGroup(panelManualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtValue, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblIntroduceDataPoints))
+                    .addContainerGap(37, Short.MAX_VALUE)))
+        );
+
+        panelDataInput.add(panelManual, "card19");
+
+        javax.swing.GroupLayout panelTableLayout = new javax.swing.GroupLayout(panelTable);
+        panelTable.setLayout(panelTableLayout);
+        panelTableLayout.setHorizontalGroup(
+            panelTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panelTableLayout.setVerticalGroup(
+            panelTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 88, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
         background.setLayout(backgroundLayout);
         backgroundLayout.setHorizontalGroup(
@@ -134,43 +317,47 @@ public class SortJFrame extends javax.swing.JFrame {
             .addGroup(backgroundLayout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, backgroundLayout.createSequentialGroup()
+                            .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(backgroundLayout.createSequentialGroup()
+                                    .addComponent(lblNSwaps, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtNumSwaps, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, backgroundLayout.createSequentialGroup()
+                                    .addComponent(lblExecutionTime)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtExecutionTime, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(backgroundLayout.createSequentialGroup()
+                                    .addComponent(lblNComparissons)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(txtNumComparissons, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(18, 18, 18)
+                            .addComponent(panelTable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(backgroundLayout.createSequentialGroup()
                             .addComponent(bttnClear)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(bttnClose))
                         .addGroup(backgroundLayout.createSequentialGroup()
-                            .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                .addComponent(txtValue))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(backgroundLayout.createSequentialGroup()
-                                    .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(bttnSort, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(sortingComboBox, 0, 104, Short.MAX_VALUE))
-                                        .addGroup(backgroundLayout.createSequentialGroup()
-                                            .addGap(9, 9, 9)
-                                            .addComponent(checkBoxAscending, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblDataInput, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(18, 18, 18)
+                            .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(bttnSort, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(sortingComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(backgroundLayout.createSequentialGroup()
-                                        .addComponent(lblNSwaps, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                                        .addComponent(txtNumSwaps, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(backgroundLayout.createSequentialGroup()
-                                            .addComponent(lblExecutionTime)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(txtExecutionTime, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
-                                            .addComponent(lblNComparissons)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(txtNumComparissons, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
-                .addContainerGap(26, Short.MAX_VALUE))
+                                        .addGap(9, 9, 9)
+                                        .addComponent(checkBoxAscending, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(bttnManualInput, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(18, 18, 18)
+                            .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addComponent(bttnAutomaticInput, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE))))
+                    .addComponent(lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelDataInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         backgroundLayout.setVerticalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,8 +365,13 @@ public class SortJFrame extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addComponent(lbl)
                 .addGap(18, 18, 18)
-                .addComponent(txtValue, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bttnManualInput)
+                    .addComponent(lblDataInput)
+                    .addComponent(bttnAutomaticInput))
+                .addGap(18, 18, 18)
+                .addComponent(panelDataInput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 21, Short.MAX_VALUE)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(backgroundLayout.createSequentialGroup()
                         .addComponent(bttnSort)
@@ -190,19 +382,22 @@ public class SortJFrame extends javax.swing.JFrame {
                     .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNumSwaps, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNSwaps))
-                .addGap(4, 4, 4)
-                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNComparissons)
-                    .addComponent(txtNumComparissons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtExecutionTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblExecutionTime))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(backgroundLayout.createSequentialGroup()
+                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtNumSwaps, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNSwaps))
+                        .addGap(4, 4, 4)
+                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblNComparissons)
+                            .addComponent(txtNumComparissons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtExecutionTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblExecutionTime)))
+                    .addComponent(panelTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bttnClear)
                     .addComponent(bttnClose))
@@ -213,9 +408,7 @@ public class SortJFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(background, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,86 +418,39 @@ public class SortJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtValueKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValueKeyTyped
+        int key = evt.getKeyChar();
+        boolean numero = key >= 48 && key <= 57;
+        if(!numero)
+        evt.consume();
+    }//GEN-LAST:event_txtValueKeyTyped
+
     private void txtValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValueActionPerformed
         modelList1.addElement(txtValue.getText());
         txtValue.setText("");
     }//GEN-LAST:event_txtValueActionPerformed
 
-    private void bttnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnCloseActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_bttnCloseActionPerformed
+    private void bttnAutomaticInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnAutomaticInputActionPerformed
+        panelDataInput.removeAll();
+        panelDataInput.add(panelAutomatic);
+        panelDataInput.repaint();
+        panelDataInput.revalidate();
+    }//GEN-LAST:event_bttnAutomaticInputActionPerformed
 
-    private void bttnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnClearActionPerformed
-        modelList1.removeAllElements();
-        modelList2.removeAllElements();
-    }//GEN-LAST:event_bttnClearActionPerformed
+    private void bttnManualInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnManualInputActionPerformed
+        panelDataInput.removeAll();
+        panelDataInput.add(panelManual);
+        panelDataInput.repaint();
+        panelDataInput.revalidate();
+    }//GEN-LAST:event_bttnManualInputActionPerformed
 
-    private void bttnSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnSortActionPerformed
-        Integer N = initialList.getModel().getSize();
-        Integer[] arr = new Integer[N];
-        // Loading data into the array
-        for(int i = 0; i < N; i++){
-            arr[i] = Integer.parseInt(initialList.getModel().getElementAt(i));
-        }
-        
-        // Get selected algorithm from combobox
-        int selectedAlgorithm = (Integer) sortingComboBox.getSelectedIndex();
-        // Get selected election for the direction of sorting
-        Boolean isAscending = (Boolean) checkBoxAscending.isSelected();
-        
-        // Sorting according to the chosed algorithm
-        Sorting algo = new Sorting();
-        switch (selectedAlgorithm) {
-            case 0:
-                algo.bubble(arr);
-                break;
-//            case "QuickSort":
-//                QuickSort.quickSort(arr);
-//                break;
-            case 1:
-                algo.insertion(arr);
-                break;
-            case 2:
-                algo.binaryInsertion(arr);
-                break;
-            case 3:
-                algo.insertion(arr);
-                break;
-            case 4:
-                algo.selection(arr);
-                break;
-            case 5:
-                algo.quickSort(arr);
-                break;
-            case 6:
-                algo.merge(arr);
-                break;
-            case 7:
-                algo.heap(arr);
-                break;
-            default:
-                break;
-        }
-        txtNumSwaps.setText(Integer.toString(algo.getNumSwaps()));
-        txtNumComparissons.setText(Integer.toString(algo.getNumComparissons()));
-        txtExecutionTime.setText(Double.toString(algo.getExecutionTime()));
-        
-        modelList2.removeAllElements();
-        if (isAscending)
-            for(int i = 0; i < N; i++)
-               modelList2.addElement(arr[i].toString());
-        else
-            for(int i = N - 1; i >= 0; i--)
-               modelList2.addElement(arr[i].toString());
-            
-    }//GEN-LAST:event_bttnSortActionPerformed
+    private void txtExecutionTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtExecutionTimeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtExecutionTimeActionPerformed
 
-    private void txtValueKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValueKeyTyped
-        int key = evt.getKeyChar();
-        boolean numero = key >= 48 && key <= 57;
-        if(!numero)
-            evt.consume();
-    }//GEN-LAST:event_txtValueKeyTyped
+    private void checkBoxAscendingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxAscendingActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_checkBoxAscendingActionPerformed
 
     private void txtNumSwapsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumSwapsActionPerformed
         // TODO add your handling code here:
@@ -314,13 +460,93 @@ public class SortJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNumComparissonsActionPerformed
 
-    private void checkBoxAscendingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxAscendingActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_checkBoxAscendingActionPerformed
+    private void bttnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnCloseActionPerformed
+        // Deselect the toggle button
+        bttnClose.setSelected(false);
+        this.dispose();
+    }//GEN-LAST:event_bttnCloseActionPerformed
 
-    private void txtExecutionTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtExecutionTimeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtExecutionTimeActionPerformed
+    private void bttnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnClearActionPerformed
+        bttnClear.setSelected(false);
+        modelList1.removeAllElements();
+        modelList2.removeAllElements();
+    }//GEN-LAST:event_bttnClearActionPerformed
+
+    private void bttnSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnSortActionPerformed
+        bttnSort.setSelected(false);
+
+        Integer N = initialList.getModel().getSize();
+        Integer[] arr = new Integer[N];
+        // Loading data into the array
+        for(int i = 0; i < N; i++){
+            //arr[i] = Integer.parseInt(initialList.getModel().getElementAt(i));
+            arr[i] = Integer.parseInt(initialList.getModel().getElementAt(i));
+
+        }
+
+        // Get selected algorithm from combobox
+        int selectedAlgorithm = (Integer) sortingComboBox.getSelectedIndex();
+        // Get selected election for the direction of sorting
+        Boolean isAscending = (Boolean) checkBoxAscending.isSelected();
+
+        // Sorting according to the chosed algorithm
+        Sorting algo = new Sorting();
+        switch (selectedAlgorithm) {
+            case 0:
+            algo.bubble(arr);
+            break;
+            //            case "QuickSort":
+            //                QuickSort.quickSort(arr);
+            //                break;
+            case 1:
+            algo.insertion(arr);
+            break;
+            case 2:
+            algo.binaryInsertion(arr);
+            break;
+            case 3:
+            algo.insertion(arr);
+            break;
+            case 4:
+            algo.selection(arr);
+            break;
+            case 5:
+            algo.quickSort(arr);
+            break;
+            case 6:
+            algo.merge(arr);
+            break;
+            case 7:
+            algo.heap(arr);
+            break;
+            default:
+            break;
+        }
+        txtNumSwaps.setText(Integer.toString(algo.getNumSwaps()));
+        txtNumComparissons.setText(Integer.toString(algo.getNumComparissons()));
+        txtExecutionTime.setText(Double.toString(algo.getExecutionTime()));
+
+        modelList2.removeAllElements();
+        if (isAscending)
+        for(int i = 0; i < N; i++)
+        modelList2.addElement(arr[i].toString());
+        else
+        for(int i = N - 1; i >= 0; i--)
+        modelList2.addElement(arr[i].toString());
+
+    }//GEN-LAST:event_bttnSortActionPerformed
+
+    private void bttnGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnGenerateActionPerformed
+        bttnGenerate.setSelected(false);
+        modelList1.removeAllElements();
+        modelList2.removeAllElements();
+        
+        Random random = new Random();
+        int min = (int) spinnerMinVal.getValue();
+        int max = (int) spinnerMaxVal.getValue();
+        for (int i = 0; i < (int) spinnerNumElements.getValue(); i++)
+            modelList1.addElement(Integer.toString(random.nextInt(max - min) + min));
+    }//GEN-LAST:event_bttnGenerateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -359,19 +585,39 @@ public class SortJFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel background;
+    private javax.swing.JRadioButton bttnAutomaticInput;
     private javax.swing.JToggleButton bttnClear;
     private javax.swing.JToggleButton bttnClose;
+    private javax.swing.JToggleButton bttnGenerate;
+    private javax.swing.ButtonGroup bttnGroupDataInput;
+    private javax.swing.JRadioButton bttnManualInput;
     private javax.swing.JToggleButton bttnSort;
     private javax.swing.JCheckBox checkBoxAscending;
     private javax.swing.JList<String> initialList;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JLabel lbl;
+    private javax.swing.JLabel lblDataInput;
     private javax.swing.JLabel lblExecutionTime;
+    private javax.swing.JLabel lblIntroduceDataPoints;
+    private javax.swing.JLabel lblMax;
     private javax.swing.JLabel lblNComparissons;
     private javax.swing.JLabel lblNSwaps;
+    private javax.swing.JPanel panelAutomatic;
+    private javax.swing.JPanel panelDataInput;
+    private javax.swing.JPanel panelManual;
+    private javax.swing.JPanel panelTable;
     private javax.swing.JList<String> sortedList;
     private javax.swing.JComboBox<String> sortingComboBox;
+    private javax.swing.JSpinner spinnerMaxVal;
+    private javax.swing.JSpinner spinnerMinVal;
+    private javax.swing.JSpinner spinnerNumElements;
     private javax.swing.JTextField txtExecutionTime;
     private javax.swing.JTextField txtNumComparissons;
     private javax.swing.JTextField txtNumSwaps;
