@@ -4,8 +4,6 @@
  */
 package uni.aed.sorting;
 
-import java.util.Date;
-
 /**
  *
  * @author AndreP
