@@ -4,7 +4,7 @@
 
 package uni.aed.sortingproject;
 
-import gui.SortJFrame;
+import gui.FrmMain;
 
 /**
  *
@@ -13,7 +13,7 @@ import gui.SortJFrame;
 public class SortingProject {
 
     public static void main(String[] args) {
-        SortJFrame v1 = new SortJFrame();
+        FrmMain v1 = new FrmMain();
         v1.setVisible(true);
         
     }
