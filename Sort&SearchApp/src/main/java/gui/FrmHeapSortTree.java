@@ -4,6 +4,7 @@
  */
 package gui;
 
+import java.util.Arrays;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import uni.aed.HeapSortDLL.DNodo;
@@ -200,7 +201,8 @@ public class FrmHeapSortTree extends javax.swing.JFrame {
     }//GEN-LAST:event_bttnSortActionPerformed
 
     private Integer[] processAndSortList() {
-        Integer[] originalList = (Integer[]) modeloList1.toArray();
+        Integer[] originalList = Arrays.stream(modeloList1.toArray())
+                .map(obj->Integer.valueOf(obj.toString())).toArray(Integer[]::new);
         int len = originalList.length;
         if (len <= 1) 
             return originalList;
