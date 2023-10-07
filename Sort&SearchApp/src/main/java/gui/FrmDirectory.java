@@ -13,7 +13,7 @@ import model.Person;
 import uni.aed.directory.Directory;
 import uni.aed.directory.DirectoryV1;
 import uni.aed.search.Search;
-import uni.aed.search.SearchAlgorithms;
+import uni.aed.search.SearchObject;
 
 /**
  *
@@ -488,7 +488,7 @@ public class FrmDirectory extends javax.swing.JFrame {
             return;
         }
 
-        SearchAlgorithms search = new SearchAlgorithms();
+        SearchObject search = new SearchObject();
         Object [] listObjects = modelList1.toArray();
         String [] listPersons = new String [listObjects.length];
         for(int i = 0; i < listPersons.length; i++) {

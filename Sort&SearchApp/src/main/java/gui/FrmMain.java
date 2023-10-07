@@ -28,16 +28,21 @@ public class FrmMain extends javax.swing.JFrame {
 
         jMenu3 = new javax.swing.JMenu();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        jmSortAndSearch = new javax.swing.JMenu();
         menuItemIntegers = new javax.swing.JMenuItem();
         menuItemObjects = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        jmLinkedLists = new javax.swing.JMenu();
+        jmiSimpleLinkedList = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jmBigNumbers = new javax.swing.JMenu();
+        jmiBigNumbers = new javax.swing.JMenuItem();
 
         jMenu3.setText("jMenu3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu1.setText("Search and Sort Methods");
+        jmSortAndSearch.setText("Search and Sort Methods");
 
         menuItemIntegers.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         menuItemIntegers.setText("Data Integers");
@@ -46,7 +51,7 @@ public class FrmMain extends javax.swing.JFrame {
                 menuItemIntegersActionPerformed(evt);
             }
         });
-        jMenu1.add(menuItemIntegers);
+        jmSortAndSearch.add(menuItemIntegers);
 
         menuItemObjects.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         menuItemObjects.setText("Data Objects");
@@ -55,12 +60,48 @@ public class FrmMain extends javax.swing.JFrame {
                 menuItemObjectsActionPerformed(evt);
             }
         });
-        jMenu1.add(menuItemObjects);
+        jmSortAndSearch.add(menuItemObjects);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(jmSortAndSearch);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        jmLinkedLists.setText("LinkedLists");
+
+        jmiSimpleLinkedList.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jmiSimpleLinkedList.setText("Simple, Double, Circular");
+        jmiSimpleLinkedList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiSimpleLinkedListActionPerformed(evt);
+            }
+        });
+        jmLinkedLists.add(jmiSimpleLinkedList);
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem1.setText("Simple Bicycle");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jmLinkedLists.add(jMenuItem1);
+
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem2.setText("HeapSortTree");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jmLinkedLists.add(jMenuItem2);
+
+        jMenuBar1.add(jmLinkedLists);
+
+        jmBigNumbers.setText("BigNumbers");
+
+        jmiBigNumbers.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jmiBigNumbers.setText("jMenuItem1");
+        jmBigNumbers.add(jmiBigNumbers);
+
+        jMenuBar1.add(jmBigNumbers);
 
         setJMenuBar(jMenuBar1);
 
@@ -68,7 +109,7 @@ public class FrmMain extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 674, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,6 +130,21 @@ public class FrmMain extends javax.swing.JFrame {
         v.setVisible(true);
 
     }//GEN-LAST:event_menuItemObjectsActionPerformed
+
+    private void jmiSimpleLinkedListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSimpleLinkedListActionPerformed
+        FrmLinkedList v = new FrmLinkedList();
+        v.setVisible(true);
+    }//GEN-LAST:event_jmiSimpleLinkedListActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        FrmLinkedListBicycle v = new FrmLinkedListBicycle();
+        v.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        FrmHeapSortTree v = new FrmHeapSortTree();
+        v.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -126,10 +182,15 @@ public class FrmMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenu jmBigNumbers;
+    private javax.swing.JMenu jmLinkedLists;
+    private javax.swing.JMenu jmSortAndSearch;
+    private javax.swing.JMenuItem jmiBigNumbers;
+    private javax.swing.JMenuItem jmiSimpleLinkedList;
     private javax.swing.JMenuItem menuItemIntegers;
     private javax.swing.JMenuItem menuItemObjects;
     // End of variables declaration//GEN-END:variables
