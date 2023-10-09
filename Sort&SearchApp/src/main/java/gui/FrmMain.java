@@ -98,7 +98,12 @@ public class FrmMain extends javax.swing.JFrame {
         jmBigNumbers.setText("BigNumbers");
 
         jmiBigNumbers.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jmiBigNumbers.setText("jMenuItem1");
+        jmiBigNumbers.setText("BigNumbers");
+        jmiBigNumbers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiBigNumbersActionPerformed(evt);
+            }
+        });
         jmBigNumbers.add(jmiBigNumbers);
 
         jMenuBar1.add(jmBigNumbers);
@@ -145,6 +150,11 @@ public class FrmMain extends javax.swing.JFrame {
         FrmHeapSortTree v = new FrmHeapSortTree();
         v.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jmiBigNumbersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiBigNumbersActionPerformed
+        FrmBigNumbers v = new FrmBigNumbers();
+        v.setVisible(true);
+    }//GEN-LAST:event_jmiBigNumbersActionPerformed
 
     /**
      * @param args the command line arguments

@@ -4,6 +4,9 @@
  */
 package gui;
 
+import javax.swing.JOptionPane;
+import uni.aed.bignumbers.BigInt;
+
 /**
  *
  * @author AndreP
@@ -15,6 +18,8 @@ public class FrmBigNumbers extends javax.swing.JFrame {
      */
     public FrmBigNumbers() {
         initComponents();
+        // Centering window
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -26,34 +31,80 @@ public class FrmBigNumbers extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        bttnClear = new javax.swing.JToggleButton();
-        bttnClose = new javax.swing.JToggleButton();
-        bttnManualInput = new javax.swing.JRadioButton();
-        lbl = new javax.swing.JLabel();
-        lblDataInput = new javax.swing.JLabel();
-        bttnAutomaticInput = new javax.swing.JRadioButton();
-        panelDataInput = new javax.swing.JPanel();
-        panelAutomatic = new javax.swing.JPanel();
-        spinnerMinVal = new javax.swing.JSpinner();
-        spinnerMaxVal = new javax.swing.JSpinner();
-        jLabel1 = new javax.swing.JLabel();
-        lblMax = new javax.swing.JLabel();
-        spinnerNumElements = new javax.swing.JSpinner();
-        jLabel2 = new javax.swing.JLabel();
-        checkBoxUnique = new javax.swing.JCheckBox();
-        bttnGenerate = new javax.swing.JToggleButton();
-        panelManual = new javax.swing.JPanel();
-        txtValue = new javax.swing.JTextField();
-        lblIntroduceDataPoints = new javax.swing.JLabel();
+        lblTitle = new javax.swing.JLabel();
+        txtNum1 = new javax.swing.JTextField();
+        lblIntroduceValues = new javax.swing.JLabel();
+        lblNum1 = new javax.swing.JLabel();
+        txtNum2 = new javax.swing.JTextField();
+        lblNum2 = new javax.swing.JLabel();
+        bttnSum = new javax.swing.JButton();
+        bttnSub = new javax.swing.JButton();
+        bttnMultiplication = new javax.swing.JButton();
+        bttnDivision = new javax.swing.JButton();
+        lblResult = new javax.swing.JLabel();
+        txtResult = new javax.swing.JTextField();
+        bttnClose = new javax.swing.JButton();
+        bttnClear = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        bttnClear.setText("Clear");
-        bttnClear.addActionListener(new java.awt.event.ActionListener() {
+        lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblTitle.setText("BIG NUMBER OPERATIONS");
+
+        txtNum1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bttnClearActionPerformed(evt);
+                txtNum1ActionPerformed(evt);
             }
         });
+        txtNum1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNum1KeyTyped(evt);
+            }
+        });
+
+        lblIntroduceValues.setText("Introduzca valores:");
+
+        lblNum1.setText("Valor 1:");
+
+        txtNum2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNum2ActionPerformed(evt);
+            }
+        });
+
+        lblNum2.setText("Valor 2:");
+
+        bttnSum.setIcon(new javax.swing.ImageIcon("C:\\Users\\AndreP\\OneDrive - UNIVERSIDAD NACIONAL DE INGENIERIA\\Code\\Algorithms & Data Structures\\AlgorithmsAndDataStructures\\Sort&SearchApp\\src\\main\\resources\\images\\arithmeticOperations\\plus.jpg")); // NOI18N
+        bttnSum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnSumActionPerformed(evt);
+            }
+        });
+
+        bttnSub.setIcon(new javax.swing.ImageIcon("C:\\Users\\AndreP\\OneDrive - UNIVERSIDAD NACIONAL DE INGENIERIA\\Code\\Algorithms & Data Structures\\AlgorithmsAndDataStructures\\Sort&SearchApp\\src\\main\\resources\\images\\arithmeticOperations\\less.jpg")); // NOI18N
+        bttnSub.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnSubActionPerformed(evt);
+            }
+        });
+
+        bttnMultiplication.setIcon(new javax.swing.ImageIcon("C:\\Users\\AndreP\\OneDrive - UNIVERSIDAD NACIONAL DE INGENIERIA\\Code\\Algorithms & Data Structures\\AlgorithmsAndDataStructures\\Sort&SearchApp\\src\\main\\resources\\images\\arithmeticOperations\\mult.jpg")); // NOI18N
+        bttnMultiplication.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnMultiplicationActionPerformed(evt);
+            }
+        });
+
+        bttnDivision.setIcon(new javax.swing.ImageIcon("C:\\Users\\AndreP\\OneDrive - UNIVERSIDAD NACIONAL DE INGENIERIA\\Code\\Algorithms & Data Structures\\AlgorithmsAndDataStructures\\Sort&SearchApp\\src\\main\\resources\\images\\arithmeticOperations\\div.jpg")); // NOI18N
+        bttnDivision.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnDivisionActionPerformed(evt);
+            }
+        });
+
+        lblResult.setText("Resultado:");
+
+        txtResult.setEditable(false);
 
         bttnClose.setText("Close");
         bttnClose.addActionListener(new java.awt.event.ActionListener() {
@@ -62,264 +113,159 @@ public class FrmBigNumbers extends javax.swing.JFrame {
             }
         });
 
-        bttnManualInput.setText("Manual");
-        bttnManualInput.addActionListener(new java.awt.event.ActionListener() {
+        bttnClear.setText("Clear");
+        bttnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bttnManualInputActionPerformed(evt);
+                bttnClearActionPerformed(evt);
             }
         });
-
-        lbl.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lbl.setText("BIG NUMBER OPERATIONS");
-
-        lblDataInput.setText("Data input:");
-
-        bttnAutomaticInput.setSelected(true);
-        bttnAutomaticInput.setText("Automatic");
-        bttnAutomaticInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bttnAutomaticInputActionPerformed(evt);
-            }
-        });
-
-        panelDataInput.setLayout(new java.awt.CardLayout());
-
-        spinnerMaxVal.setValue(10);
-
-        jLabel1.setText("Min. value");
-
-        lblMax.setText("Max. value");
-
-        spinnerNumElements.setValue(8);
-
-        jLabel2.setText("N° elements");
-
-        checkBoxUnique.setText("Unique values");
-
-        bttnGenerate.setText("Generate");
-        bttnGenerate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bttnGenerateActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panelAutomaticLayout = new javax.swing.GroupLayout(panelAutomatic);
-        panelAutomatic.setLayout(panelAutomaticLayout);
-        panelAutomaticLayout.setHorizontalGroup(
-            panelAutomaticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelAutomaticLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelAutomaticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelAutomaticLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(spinnerNumElements, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
-                    .addComponent(checkBoxUnique, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bttnGenerate)
-                .addGap(26, 26, 26)
-                .addGroup(panelAutomaticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblMax, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelAutomaticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(spinnerMaxVal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(spinnerMinVal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-        panelAutomaticLayout.setVerticalGroup(
-            panelAutomaticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelAutomaticLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(panelAutomaticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblMax)
-                    .addComponent(jLabel2)
-                    .addComponent(spinnerNumElements, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(spinnerMaxVal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelAutomaticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(spinnerMinVal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(checkBoxUnique)
-                    .addComponent(bttnGenerate))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        panelDataInput.add(panelAutomatic, "card20");
-
-        txtValue.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtValueActionPerformed(evt);
-            }
-        });
-        txtValue.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtValueKeyTyped(evt);
-            }
-        });
-
-        lblIntroduceDataPoints.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        lblIntroduceDataPoints.setText("Introduce data points:");
-
-        javax.swing.GroupLayout panelManualLayout = new javax.swing.GroupLayout(panelManual);
-        panelManual.setLayout(panelManualLayout);
-        panelManualLayout.setHorizontalGroup(
-            panelManualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelManualLayout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addGroup(panelManualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelManualLayout.createSequentialGroup()
-                        .addComponent(lblIntroduceDataPoints, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelManualLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtValue, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(75, Short.MAX_VALUE))
-        );
-        panelManualLayout.setVerticalGroup(
-            panelManualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelManualLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(panelManualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtValue, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblIntroduceDataPoints))
-                .addContainerGap(22, Short.MAX_VALUE))
-        );
-
-        panelDataInput.add(panelManual, "card19");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(12, 12, 12)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(bttnClear)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(bttnClose))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(lblResult, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtResult))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblNum1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblNum2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(bttnMultiplication)
+                                            .addComponent(bttnSum))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(bttnSub)
+                                            .addComponent(bttnDivision))
+                                        .addGap(0, 70, Short.MAX_VALUE))
+                                    .addComponent(txtNum2)
+                                    .addComponent(txtNum1))))
+                        .addGap(13, 13, 13))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblDataInput, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24)
-                        .addComponent(bttnManualInput, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)
-                        .addComponent(bttnAutomaticInput, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(bttnClear)
-                            .addGap(261, 261, 261)
-                            .addComponent(bttnClose)
-                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(panelDataInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addContainerGap()))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblIntroduceValues, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(lbl)
+                .addComponent(lblTitle)
+                .addGap(18, 18, 18)
+                .addComponent(lblIntroduceValues)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNum1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNum1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bttnManualInput)
-                    .addComponent(lblDataInput)
-                    .addComponent(bttnAutomaticInput))
-                .addGap(18, 18, 18)
-                .addComponent(panelDataInput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 344, Short.MAX_VALUE)
+                    .addComponent(txtNum2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNum2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bttnClear)
-                    .addComponent(bttnClose))
+                    .addComponent(bttnSum)
+                    .addComponent(bttnSub))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bttnMultiplication)
+                    .addComponent(bttnDivision))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblResult)
+                    .addComponent(txtResult, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bttnClose)
+                    .addComponent(bttnClear))
                 .addGap(26, 26, 26))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtNum1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNum1ActionPerformed
+        txtNum2.requestFocus();
+    }//GEN-LAST:event_txtNum1ActionPerformed
+
+    private void txtNum2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNum2ActionPerformed
+        bttnSum.requestFocus();
+    }//GEN-LAST:event_txtNum2ActionPerformed
+
+    private BigInt[] getData(){
+        BigInt[] nums = new BigInt[2];
+        try{
+            nums[0] = new BigInt(txtNum1.getText());
+            nums[1] = new BigInt(txtNum2.getText());
+        }
+        catch(IllegalArgumentException e){
+            JOptionPane.showMessageDialog(this, e.getMessage(), "ERROR", JOptionPane.WARNING_MESSAGE);
+            return null;
+        }
+        return nums;
+    }
+    private void bttnSumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnSumActionPerformed
+        BigInt[] nums = getData();
+        if(nums == null || nums[0] == null || nums[1] == null) return;
+
+        BigInt resultado = nums[0].sum(nums[1]);
+        txtResult.setText(resultado.toString(","));
+    }//GEN-LAST:event_bttnSumActionPerformed
+
+    private void bttnSubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnSubActionPerformed
+        BigInt[] nums = getData();
+        if(nums == null || nums[0] == null || nums[1] == null) return;
+
+        BigInt resultado = nums[0].sub(nums[1]);
+        txtResult.setText(resultado.toString(","));
+    }//GEN-LAST:event_bttnSubActionPerformed
+
+    private void bttnMultiplicationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnMultiplicationActionPerformed
+        BigInt[] nums = getData();
+        if(nums == null || nums[0] == null || nums[1] == null) return;
+
+        BigInt resultado = nums[0].mult(nums[1]);
+        txtResult.setText(resultado.toString(","));
+    }//GEN-LAST:event_bttnMultiplicationActionPerformed
+
+    private void bttnDivisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnDivisionActionPerformed
+        BigInt[] nums = getData();
+        if(nums == null || nums[0] == null || nums[1] == null) return;
+
+        BigInt resultado = nums[0].simpleDiv(nums[1]);
+        txtResult.setText(resultado.toString(","));
+    }//GEN-LAST:event_bttnDivisionActionPerformed
+
     private void bttnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnClearActionPerformed
-        bttnClear.setSelected(false);
-//        modelList1.removeAllElements();
-//        modelList2.removeAllElements();
+        txtNum1.setText("");
+        txtNum2.setText("");
+        txtResult.setText("");
     }//GEN-LAST:event_bttnClearActionPerformed
 
     private void bttnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnCloseActionPerformed
-        // Deselect the toggle button
-        bttnClose.setSelected(false);
         this.dispose();
     }//GEN-LAST:event_bttnCloseActionPerformed
 
-    private void bttnManualInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnManualInputActionPerformed
-        panelDataInput.removeAll();
-        panelDataInput.add(panelManual);
-        panelDataInput.repaint();
-        panelDataInput.revalidate();
-    }//GEN-LAST:event_bttnManualInputActionPerformed
-
-    private void bttnAutomaticInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnAutomaticInputActionPerformed
-        panelDataInput.removeAll();
-        panelDataInput.add(panelAutomatic);
-        panelDataInput.repaint();
-        panelDataInput.revalidate();
-    }//GEN-LAST:event_bttnAutomaticInputActionPerformed
-
-    private void bttnGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnGenerateActionPerformed
-//        bttnGenerate.setSelected(false);
-//        modelList1.removeAllElements();
-//        modelList2.removeAllElements();
-//
-//        Random random = new Random();
-//        int min = (int) spinnerMinVal.getValue();
-//        int max = (int) spinnerMaxVal.getValue();
-//        int randomVal;
-//        int n = (int) spinnerNumElements.getValue();
-//        int[] arr = new int[n];
-//        Boolean uniqueValue = (Boolean) checkBoxUnique.isSelected();
-//
-//        if (min > max){
-//            JOptionPane.showMessageDialog(null, "Range of values not valid.", "Warning", JOptionPane.WARNING_MESSAGE);
-//            return;
-//        }
-//
-//        if(!uniqueValue)
-//        for (int i = 0; i < n; i++){
-//            randomVal = random.nextInt(max - min) + min;
-//            arr[i] = randomVal;
-//        }
-//        else{
-//            if (max - min + 1 <= n){
-//                JOptionPane.showMessageDialog(null, "Range is not wide enough", "Warning", JOptionPane.WARNING_MESSAGE);
-//                return;
-//            }
-//            boolean isFound;
-//            for (int i = 0; i < n; i++){
-//                // Search if the value was used
-//                do{
-//                    isFound = false;
-//                    randomVal = random.nextInt(max - min) + min;
-//                    for (int j = 0; j < i; j++){
-//                        if (randomVal == arr[j])
-//                        isFound = true;
-//                    }
-//                }while(isFound);
-//
-//                arr[i] = randomVal;
-//            }
-//        }
-//        for (int i = 0; i < n; i++)
-//        modelList1.addElement(Integer.toString(arr[i]));
-    }//GEN-LAST:event_bttnGenerateActionPerformed
-
-    private void txtValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValueActionPerformed
-//        modelList1.addElement(txtValue.getText());
-//        txtValue.setText("");
-    }//GEN-LAST:event_txtValueActionPerformed
-
-    private void txtValueKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValueKeyTyped
-        int key = evt.getKeyChar();
-        boolean numero = key >= 48 && key <= 57;
+    private void txtNum1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNum1KeyTyped
+        int key =evt.getKeyChar();
+        boolean numero=key>=48 && key<=57;
         if(!numero)
-        evt.consume();
-    }//GEN-LAST:event_txtValueKeyTyped
+            evt.consume();
+    }//GEN-LAST:event_txtNum1KeyTyped
 
     /**
      * @param args the command line arguments
@@ -357,24 +303,19 @@ public class FrmBigNumbers extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton bttnAutomaticInput;
-    private javax.swing.JToggleButton bttnClear;
-    private javax.swing.JToggleButton bttnClose;
-    private javax.swing.JToggleButton bttnGenerate;
-    private javax.swing.JRadioButton bttnManualInput;
-    private javax.swing.JCheckBox checkBoxUnique;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel lbl;
-    private javax.swing.JLabel lblDataInput;
-    private javax.swing.JLabel lblIntroduceDataPoints;
-    private javax.swing.JLabel lblMax;
-    private javax.swing.JPanel panelAutomatic;
-    private javax.swing.JPanel panelDataInput;
-    private javax.swing.JPanel panelManual;
-    private javax.swing.JSpinner spinnerMaxVal;
-    private javax.swing.JSpinner spinnerMinVal;
-    private javax.swing.JSpinner spinnerNumElements;
-    private javax.swing.JTextField txtValue;
+    private javax.swing.JButton bttnClear;
+    private javax.swing.JButton bttnClose;
+    private javax.swing.JButton bttnDivision;
+    private javax.swing.JButton bttnMultiplication;
+    private javax.swing.JButton bttnSub;
+    private javax.swing.JButton bttnSum;
+    private javax.swing.JLabel lblIntroduceValues;
+    private javax.swing.JLabel lblNum1;
+    private javax.swing.JLabel lblNum2;
+    private javax.swing.JLabel lblResult;
+    private javax.swing.JLabel lblTitle;
+    private javax.swing.JTextField txtNum1;
+    private javax.swing.JTextField txtNum2;
+    private javax.swing.JTextField txtResult;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,7 @@
 package uni.aed.bignumbers;
 
 import java.math.BigInteger;
+import java.util.Iterator;
 
 /**
  *
@@ -19,7 +20,8 @@ public class BigInt {
     
     // CONSTRUCTORS
     public BigInt(){
-        this("");
+        this.head = new Node();
+        this.sign = 1;
     }   
     
     public BigInt(long value){
@@ -39,14 +41,27 @@ public class BigInt {
         ignorará los ceros precedentes. 
         Más detalles en la función extractPrecedentZeros
         */
-    
+        
+        // Recortamos los espacios en blanco
         value.trim();
+        
+        //PREGUNTA 13
+        // Verificamos si el string está vacío
+        if (value.isEmpty()) {
+            throw new IllegalArgumentException("La cadena de entrada no puede estar vacía.");
+        }
+        
         // 1. Determinamos el signo, por defecto positivo (1)
         sign = +1;
         
         if (value.charAt(0) == LESS){
             sign = -1;
             value = value.substring(1); // Remueve el '-'
+        }
+        
+        // Verificamos si consiste solo de dígitos (usando los "Regular Expressions" de Java
+        if (!value.matches("\\d+")) {
+            throw new IllegalArgumentException("El formato de la cadena de entrada es inválido. Valor: " + value);
         }
         
         // 2. Extraemos los ceros precedentes
@@ -125,12 +140,12 @@ public class BigInt {
         BigInt resultSubstraction;
         if (this.isPositive() & num.isNegative()){  //A es + y B -
             num.flipSign();
-            resultSubstraction = this.subtractPos(num);
+            resultSubstraction = this.subPos(num);
             num.flipSign();
         }
         else{  //A es - y B +
             this.flipSign();
-            resultSubstraction = this.subtractPos(num);
+            resultSubstraction = this.subPos(num);
             this.flipSign();
             if(newSign < 0)
                 resultSubstraction.flipSign();
@@ -188,13 +203,13 @@ public class BigInt {
         }
         return new BigInt(t.next);  //Quita el nodo cabeza ficticio
     }
-    public BigInt subtract(BigInt num){
+    public BigInt sub(BigInt num){
         num.flipSign();
         BigInt result = this.sum(num);
         num.flipSign();
         return result;
     }
-    private BigInt subtractPos(BigInt num) {
+    private BigInt subPos(BigInt num) {
         Node p, q, r, t;
         boolean esNegativo = false;
 
@@ -256,9 +271,56 @@ public class BigInt {
         
         return result;
     }
-    public BigInt mult(BigInt num) {
-        BigInt result = new BigInt("0");
+    public BigInt simpleMult(BigInt R) {        // EJERCICIO 17
+        BigInt L = this;  // Referencia al objeto actual
+        BigInt product = new BigInt("0");  // Inicialmente, el producto es 0
+        BigInt term = new BigInt(L.toString());  // Una copia del valor absoluto de L
+        
+        // Si alguno de los valores es cero, retorna cero
+        if(L.isZero() || R.isZero())
+            return product;
+        
+        // Asegurarse de que el término (term) es positivo
+        if (term.isNegative()) {
+            term.flipSign();
+        }
 
+        BigInt limit = new BigInt(R.toString());  // Una copia del valor absoluto de R
+
+        // Asegurarse de que el límite (limit) es positivo
+        if (limit.isNegative()) {
+            limit.flipSign();
+        }
+
+        // Usar el método `compareTo` para la condición del bucle
+        BigInt counter = new BigInt("0");
+        while (counter.compareTo(limit) < 0) {  // Mientras que el contador es menor que el límite
+            product = product.sum(term);  // Suma el término al producto acumulativo
+            counter.incr();  // Incrementa el contador
+        }
+
+        // Establecer el signo del producto
+        if (L.isNegative() == R.isNegative()) {
+            // Si L y R tienen el mismo signo, el producto es positivo
+            if (product.isNegative()) {
+                product.flipSign();
+            }
+        } else {
+            // Si L y R tienen signos diferentes, el producto es negativo
+            if (product.isPositive()) {
+                product.flipSign();
+            }
+        }
+        return product;
+    }
+
+    public BigInt mult(BigInt num) {        // EJERCICIO 18
+        BigInt result = new BigInt();
+        
+        // Si alguno de los valores es cero, retorna cero
+        if(this.isZero() || num.isZero())
+            return new BigInt();
+        
         BigInt multiplicand = new BigInt(this.toString()); // Copia del primer número
         BigInt multiplier = new BigInt(num.toString()); // Copia del segundo número
 
@@ -321,9 +383,237 @@ public class BigInt {
         this.head = newNode;
         return this;
     }
+    
+    public boolean isZero(){
+        Node p = this.head;
+        while(p.next != null){
+            if(p.value == 0)
+                p = p.next;
+            else return false;
+        }
+        if(p.value != 0)
+            return false;
+        return true;
+    }
+    public BigInt simpleDiv(BigInt R) {     // EJERCICIO 19 PARTE 1
+        // Primero, verificamos si R es 0 para evitar la división entre cero
+        if (R.isZero()) {
+            throw new ArithmeticException("División entre cero no está permitida.");
+        }
 
-    public BigInt div(BigInt num){
-        return new BigInt();
+        BigInt L = this;  // Referencia al objeto actual
+        BigInt cociente = new BigInt("0");
+        BigInt residuo = new BigInt(L.toString());  // Una copia del valor absoluto de L
+        BigInt divisor = new BigInt(R.toString());  // Una copia del valor absoluto de R
+        
+        
+        // Asegurarse de que residuo y divisor son positivos
+        if (residuo.isNegative()) {
+            residuo.flipSign();
+        }
+        if (divisor.isNegative()) {
+            divisor.flipSign();
+        }
+
+        // Bucle para calcular el cociente y el residuo
+        while (residuo.compareTo(divisor) >= 0) {
+            residuo = residuo.sub(divisor);  
+            cociente.incr();
+        }
+
+        // Establecer el signo del cociente
+        if (L.isNegative() == R.isNegative()) {
+            // Si L y R tienen el mismo signo, el cociente es positivo
+            if (cociente.isNegative()) {
+                cociente.flipSign();
+            }
+        } else {
+            // Si L y R tienen signos diferentes, el cociente es negativo
+            if (!cociente.isNegative()) {
+                cociente.flipSign();
+            }
+        }
+        if (cociente.isZero())
+            cociente.sign = +1;
+
+        return cociente;
+    }
+    
+    public void reverseLinks() {
+        Node current = head;
+        Node prev = null;
+        Node next = null;
+
+        while (current != null) {
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+        head = prev;
+    }
+
+    public BigInt div(BigInt R) { // EJERCICIO 20: Método de división usando división larga
+        // Verificar si R es 0 para evitar división entre cero
+        if (R.isZero()) {
+            throw new ArithmeticException("División entre cero no está permitida.");
+        }
+
+        // Definir y preparar las variables principales
+        BigInt dividendoActual = new BigInt(this.toString()); // El dividendo que se está considerando en cada paso
+        BigInt divisor = new BigInt(R.toString()); // El divisor con el que estamos dividiendo
+        BigInt cociente = new BigInt("0"); // El cociente que estamos construyendo
+
+        // Asegurarse de que ambos, dividendo y divisor, sean positivos para la división
+        if (dividendoActual.isNegative()) {
+            dividendoActual.flipSign();
+        }
+        if (divisor.isNegative()) {
+            divisor.flipSign();
+        }
+
+        // Invertir la dirección de las ligas para el dividendo y el divisor
+        dividendoActual.reverseLinks();
+        divisor.reverseLinks();
+
+        Node nodoActualDividendo = dividendoActual.head;
+
+        // Mientras aún haya dígitos en el dividendo
+        while (nodoActualDividendo != null) {
+            // Tomar el siguiente bloque de dígitos del dividendo
+            BigInt dividendoParcial = new BigInt(); 
+            dividendoParcial.addToRightMost(nodoActualDividendo.value);
+
+            // Determinar cuántas veces el divisor cabe en el dividendo parcial
+            short count = 0;
+            while (dividendoParcial.compareTo(divisor) >= 0) {
+                dividendoParcial = dividendoParcial.sub(divisor);
+                count++;
+            }
+
+            // Añadir ese número al cociente
+            cociente.addToRightMost(count);
+
+            // Avanzar al siguiente nodo del dividendo
+            nodoActualDividendo = nodoActualDividendo.next;
+        }
+
+        // Revertir el orden de los nodos en el cociente
+        cociente.reverseLinks();
+
+        // Determinar el signo del cociente
+        if (this.isNegative() == R.isNegative()) {
+            if (cociente.isNegative()) {
+                cociente.flipSign();
+            }
+        } else {
+            if (!cociente.isNegative()) {
+                cociente.flipSign();
+            }
+        }
+
+        return cociente;
+    }
+
+
+   private void appendNode(Node node) {
+       if (this.head == null) {
+           this.head = node;
+       } else {
+           Node current = this.head;
+           while (current.next != null) {
+               current = current.next;
+           }
+           current.next = node;
+       }
+   }
+
+    private void addToRightMost(short value) {
+        // Agregar un nodo al extremo derecho (extremo menos significativo) del BigInt
+        Node newNode = new Node(value);
+        if (head == null) {
+            head = newNode;
+        } else {
+            Node current = head;
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = newNode;
+        }
+    }
+    
+    public void incr(){ // EJERCICIO 15
+        /*
+        Increments in 1 the BigInt
+        */
+        boolean carry = true;
+        Node p = head;
+        
+        // Caso negativo
+        if(this.isNegative()){
+            this.flipSign();
+            this.decr();
+            this.flipSign();
+            return;
+        }
+ 
+        // Caso positivo
+        do{
+            if (p.value < Node.MAX_VALUE - 1){
+                p.value++;
+                carry = false; // Se deja de llevar el acarreo
+            }
+            else{   //Caso: el valor es 999
+                if( p.next == null){ // Si no hay siguiente bloque, lo crea
+                    p.next = new Node();
+                }
+                p.value = 0; // Llevamos el acarreo
+                p = p.next;
+                
+            }
+        }while(carry);
+        
+    }
+    public void decr(){ // EJERCICIO 16
+        /*
+        Decrements in 1 the BigInt
+        */
+        Node p = head;
+        Node prev = null; // Para mantener el nodo anterior
+        
+        // Caso negativo
+        if(this.isNegative()){ 
+            this.flipSign();
+            this.incr();
+            this.flipSign();
+            return;
+        }
+        
+        // Caso cero
+        if (p.value == 0 && p.next == null){
+            p.value = 1;
+            this.flipSign(); //A negativo
+            return;
+        }
+        
+        // Caso positivo;
+        while(true){
+            if (p.value == 0){ // Caso con acarreo. Ej: 1,000 -> 1,999 (siguiente iteración lo lleva a 0,999)
+                // Se resta al siguiente bloque
+                p.value = Node.MAX_VALUE - 1;
+                prev = p;
+                p = p.next;
+                // Se decrementará el siguiente bloque a en la siguiente iteración
+            }
+            else{ // Caso simple. Ej: 2,023 -> 2,022; 1,999 -> 0,999 si la anterior iteración se avanzó de nodo
+                p.value--;
+                if(p.value == 0 && p.next == null && prev != null){// Removemos el nodo. Ej: 0,999 -> 999
+                    prev.next = null;
+                }
+                return;
+            }
+        }
+        
     }
     
     public int compareTo(BigInt num){
@@ -356,6 +646,9 @@ public class BigInt {
     
     @Override
     public String toString(){
+        return this.toString("");
+    }
+    public String toString(String prefix){
         StringBuffer strBuf = new StringBuffer("");
         
         /*
@@ -367,7 +660,7 @@ public class BigInt {
         String format = "%0" + Node.MAX_DIGITS + "d";
         Node p = head;
         while (p.next != null){
-            strBuf.insert(0, String.format(format, p.value));
+            strBuf.insert(0, prefix + String.format(format, p.value)); //-> SOLUCION EJERCICIO 14
             p = p.next; // Se recorre el siguiente bloque 
         }
         strBuf.insert(0, p.value);  // Se agrega el bloque más significativo
@@ -379,7 +672,6 @@ public class BigInt {
         
         return strBuf.toString();
     }
-    
     
     private static String extractPrecedentZeros(String str){
         StringBuffer strBuf = new StringBuffer(str);
@@ -423,16 +715,80 @@ public class BigInt {
         
         
         // Comparing against BigInteger
-        String[] strArray = {"-100005000",
-            "-91827347300072817",
+//        String[] strArray = {"-100005000",
+//            "-91827347300072817",
+//            "8000",
+//            "3283748300000",
+//            "-7",
+//            "100005000",
+//            "-2147483646",
+//            "2147480000",
+//            "-10000000000000000"
+//        };
+        String[] strArray = {"-1000",
+            "-91827",
             "8000",
-            "3283748300000",
+            "3284",
             "-7",
-            "100005000",
-            "-2147483646",
-            "2147480000",
-            "-10000000000000000"
+            "1005",
+            "-214",
+            "2170",
+            "-1000",
+            "-0000"
         };
+        
+        // ------ IMPRIMIMOS VALORES ----- //
+        BigInt bi;
+        for (int i = 0; i < strArray.length; i++) {
+            bi = new BigInt(strArray[i]);
+            System.out.println(i + ":\t" + bi.toString(","));
+        }
+        
+        
+        // ------ PROBANDO INC Y DEC ------- //
+        
+        System.out.println("\n\nProbando incremento y decremento:");
+        System.out.println("Caso positivo:");
+        System.out.printf("\tIncremento:");
+        bi = new BigInt("999998");
+        for (int i = 0; i < 4; i++) {
+            System.out.printf(bi.toString() + ", ");
+            bi.incr();
+        }
+        System.out.printf("\n\tDecremento:");        
+        for (int i = 0; i < 4; i++) {
+            System.out.printf(bi.toString() + ", ");
+            bi.decr();
+        }
+        
+        System.out.println("\nCaso negativo:");
+        System.out.printf("\tIncremento:");
+        bi = new BigInt("-1000001");
+        for (int i = 0; i < 4; i++) {
+            System.out.printf(bi.toString() + ", ");
+            bi.incr();
+        }
+        System.out.printf("\n\tDecremento:");        
+        for (int i = 0; i < 4; i++) {
+            System.out.printf(bi.toString() + ", ");
+            bi.decr();
+        }
+        
+        System.out.println("\nCaso cero:");
+        System.out.printf("\tIncremento:");
+        bi = new BigInt("-2");
+        for (int i = 0; i < 4; i++) {
+            System.out.printf(bi.toString() + ", ");
+            bi.incr();
+        }
+        bi = new BigInt("2");
+        System.out.printf("\n\tDecremento:");        
+        for (int i = 0; i < 4; i++) {
+            System.out.printf(bi.toString() + ", ");
+            bi.decr();
+        }
+        
+        // ------- PROBANDO OPERACIONES ARITMÉTICAS ------- //
         
         BigInt e1;
         BigInt e2;
@@ -450,7 +806,8 @@ public class BigInt {
                 bi1 = new BigInteger(strArray[i]);
                 bi2 = new BigInteger(strArray[j]);                
                 
-                // ------------ SUMS ------------ //
+                // ------------ SUM AND SUB ------------ //
+                System.out.println("\n// ------------ SUM AND SUB ------------ //");
                 e3 = e1.sum(e2);
                 bi3 = bi1.add(bi2);
                 
@@ -463,17 +820,58 @@ public class BigInt {
                 }
                 
                 // ------------ MULT ------------ //
-//                e3 = e1.mult(e2);
-//                bi3 = bi1.multiply(bi2);
+                System.out.println("// ------------ SIMPLE MULT ------------ //");
+                e3 = e1.simpleMult(e2);
+                bi3 = bi1.multiply(bi2);
+                
+                System.out.println("for the pair i = " + i + "\t j = " + j);
+                System.out.println("Numbers:\te1:" + e1.toString() + "\t" + "e2:" + e2.toString());
+                System.out.println("Expected " + bi3.toString() + "\t, got " + e3.toString() + "\n");
+                if(bi3.compareTo(new BigInteger(e3.toString())) != 0){
+                    errorCount++;
+                    System.out.printf("Simple multiplication failed!!");
+                }
+                System.out.println("// ------------ MULT ------------ //");
+                e3 = e1.mult(e2);
+                bi3 = bi1.multiply(bi2);
+                
+                System.out.println("for the pair i = " + i + "\t j = " + j);
+                System.out.println("Numbers:\te1:" + e1.toString() + "\t" + "e2:" + e2.toString());
+                System.out.println("Expected " + bi3.toString() + "\t, got " + e3.toString() + "\n");
+                if(bi3.compareTo(new BigInteger(e3.toString())) != 0){
+                    errorCount++;
+                    System.out.printf("Multiplication failed!!");
+                }
+                
+                // ------------ DIV ------------ //
+                System.out.println("// ------------ SIMPLE DIV ------------ //");
+                try{ //PARTE 2 DEL EJERCICIO 19
+                    e3 = e1.simpleDiv(e2);
+                    bi3 = bi1.divide(bi2);
+                }
+                catch (ArithmeticException e){
+                    System.out.println("Exception: " + e.getMessage());
+                    continue;
+                }
+                
+                System.out.println("for the pair i = " + i + "\t j = " + j);
+                System.out.println("Numbers:\te1:" + e1.toString() + "\t" + "e2:" + e2.toString());
+                System.out.println("Expected " + bi3.toString() + "\t, got " + e3.toString() + "\n");
+                if(bi3.compareTo(new BigInteger(e3.toString())) != 0){
+                    errorCount++;
+                    System.out.printf("Simple division failed!!");
+                }
+//                System.out.println("// ------------ DIV ------------ //");
+//                e3 = e1.div(e2);
+//                bi3 = bi1.divide(bi2);
 //                
+//                System.out.println("for the pair i = " + i + "\t j = " + j);
+//                System.out.println("Numbers:\te1:" + e1.toString() + "\t" + "e2:" + e2.toString());
+//                System.out.println("Expected " + bi3.toString() + "\t, got " + e3.toString() + "\n");
 //                if(bi3.compareTo(new BigInteger(e3.toString())) != 0){
 //                    errorCount++;
-//                    System.out.printf("Multiplication failed ");
-//                    System.out.println("for the pair i = " + i + "\t j = " + j);
-//                    System.out.println("Numbers:\te1:" + e1.toString() + "\t" + "e2:" + e2.toString());
-//                    System.out.println("Expected " + bi3.toString() + "\t, got " + e3.toString() + "\n");
+//                    System.out.printf("Division failed!!");
 //                }
-                
             }
         }
         int totalOperations = (strArray.length * strArray.length) * 2;
