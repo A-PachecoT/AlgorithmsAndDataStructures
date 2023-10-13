@@ -7,7 +7,7 @@ package gui;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import uni.aed.doublelinkedlist.DoubleLinkedList;
-import uni.aed.linkedlist.ListaEnlazada;
+import uni.aed.list.ListaEnlazada;
 
 /**
  *

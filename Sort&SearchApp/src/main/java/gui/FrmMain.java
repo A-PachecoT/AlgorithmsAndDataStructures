@@ -35,8 +35,11 @@ public class FrmMain extends javax.swing.JFrame {
         jmiSimpleLinkedList = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jmBigNumbers = new javax.swing.JMenu();
         jmiBigNumbers = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
 
         jMenu3.setText("jMenu3");
 
@@ -93,6 +96,15 @@ public class FrmMain extends javax.swing.JFrame {
         });
         jmLinkedLists.add(jMenuItem2);
 
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem3.setText("Circular LinkedList");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jmLinkedLists.add(jMenuItem3);
+
         jMenuBar1.add(jmLinkedLists);
 
         jmBigNumbers.setText("BigNumbers");
@@ -107,6 +119,18 @@ public class FrmMain extends javax.swing.JFrame {
         jmBigNumbers.add(jmiBigNumbers);
 
         jMenuBar1.add(jmBigNumbers);
+
+        jMenu1.setText("FortunaCookie");
+
+        jMenuItem4.setText("Vamos!");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem4);
+
+        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
@@ -156,6 +180,16 @@ public class FrmMain extends javax.swing.JFrame {
         v.setVisible(true);
     }//GEN-LAST:event_jmiBigNumbersActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        FrmCircularLinkedList v = new FrmCircularLinkedList();
+        v.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        FrmFortuneCookie  v = new FrmFortuneCookie();
+        v.setVisible(true);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -192,10 +226,13 @@ public class FrmMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenu jmBigNumbers;
     private javax.swing.JMenu jmLinkedLists;
     private javax.swing.JMenu jmSortAndSearch;

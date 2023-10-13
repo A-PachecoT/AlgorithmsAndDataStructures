@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 import uni.aed.bicycle.Bicicleta;
 import uni.aed.bicycle.ListaBicicletas;
 import uni.aed.doublelinkedlist.DoubleLinkedList;
-import uni.aed.linkedlist.ListaEnlazada;
+import uni.aed.list.ListaEnlazada;
 
 /**
  *

@@ -1,29 +1,26 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package uni.aed.linkedListADT;
 
-/**
- *
- * @author AndreP
- */
-public class Iterador<E> implements IteratorADT<E>{
-    private Node actual;
-    public Iterador(Node node){
-    this.actual = node;
-    }
+import uni.aed.list.NoSuchElementException;
+import uni.aed.list.IteratorTDA;
 
+public class Iterador<E> implements IteratorTDA<E> {
+    private Nodo actual;
+    public Iterador(Nodo nodo){
+        this.actual=nodo;
+    }
     @Override
     public boolean hasNext() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        //return actual != null;
+        return actual!=null;
     }
 
     @Override
     public E next() throws NoSuchElementException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (actual==null)
+                throw new NoSuchElementException("No mas lementos");
+        Object data=actual.getData();
+        actual=actual.getNext();
+        return (E)data;
     }
-
+    
     
 }
