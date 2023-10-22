@@ -11,22 +11,11 @@ package uni.aed.directory;
  */
 import java.util.ArrayList;
 import java.util.Iterator;
+import model.Person;
 
-// Clase base
-class Persona {
-    private String nombre;
-
-    public Persona(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String obtenNombre() {
-        return nombre;
-    }
-}
 
 // Clase genérica Directorio
-class DirectorioV2Alt<T extends Persona> {
+class DirectorioV2Alt<T extends Person> {
     private ArrayList<T> directorio;
 
     public DirectorioV2Alt() {
@@ -43,16 +32,16 @@ class DirectorioV2Alt<T extends Persona> {
         Iterator<T> iterator = directorio.iterator();
         while (iterator.hasNext()) {
             T persona = iterator.next();
-            if (persona.obtenNombre().equals(nombre)) {
+            if (persona.getName().equals(nombre)) {
                 iterator.remove();
             }
         }
     }
 
-    // Método para mostrar el directorio (opcional)
+    // Método para mostrar el directorio
     public void muestraDirectorio() {
         for (T persona : directorio) {
-            System.out.println(persona.obtenNombre());
+            System.out.println(persona.getName());
         }
     }
     
@@ -60,12 +49,12 @@ class DirectorioV2Alt<T extends Persona> {
     // Ejemplo de uso
     public static void main(String[] args) {
         // Crear un directorio
-        DirectorioV2Alt<Persona> dir = new DirectorioV2Alt<>();
+        DirectorioV2Alt<Person> dir = new DirectorioV2Alt<>();
 
         // Agregar personas al directorio
-        dir.agrega(new Persona("Ana"));
-        dir.agrega(new Persona("Juan"));
-        dir.agrega(new Persona("Pedro"));
+        dir.agrega(new Person("Ana",11,'F'));
+        dir.agrega(new Person("Juan",15,'M'));
+        dir.agrega(new Person("Pedro",19,'M'));
 
         // Mostrar directorio
         dir.muestraDirectorio();
