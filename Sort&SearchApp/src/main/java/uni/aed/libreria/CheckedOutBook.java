@@ -19,6 +19,7 @@ public class CheckedOutBook {
                 author.name.equals(( (CheckedOutBook) node).author.name);
     }
     
+    @Override
     public String toString() {
         return "    * " + author.name + ", " + book.title + "\n";
     }

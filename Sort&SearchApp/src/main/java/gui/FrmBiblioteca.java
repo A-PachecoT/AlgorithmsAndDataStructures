@@ -13,9 +13,6 @@ import uni.aed.libreria.Library;
  */
 public class FrmBiblioteca extends javax.swing.JFrame {
     Library libreria;
-//    private DefaultListModel<String> modeloLibros;
-//    private DefaultListModel<String> modeloPrestamos;
-    
     /**
      * Creates new form FrmBiblioteca
      */
@@ -24,12 +21,6 @@ public class FrmBiblioteca extends javax.swing.JFrame {
         // Inicializa la libreria
         libreria = new Library();
         
-        // Inicializa los modelos:
-//        modeloLibros = new DefaultListModel<>();
-//        modeloPrestamos = new DefaultListModel<>();
-//        
-//        listaLibros.setModel(modeloLibros);
-//        listaPrestamoLibros.setModel(modeloPrestamos);
         
         // Agregamos botones al grupo de botones
         bttnGroupOperaciones.add(rbAgregarLibro);
@@ -41,6 +32,10 @@ public class FrmBiblioteca extends javax.swing.JFrame {
         txtLibro.setEnabled(true);
         txtAutor.setEnabled(true);
         txtUsuario.setEnabled(false);
+        
+        
+        // Centrar ventana
+        setLocationRelativeTo(null); 
 
     }
 
@@ -56,8 +51,12 @@ public class FrmBiblioteca extends javax.swing.JFrame {
         bttnGroupOperaciones = new javax.swing.ButtonGroup();
         lblTitulo = new javax.swing.JLabel();
         jPSubFrames = new javax.swing.JPanel();
-        txtFieldPrestamos = new javax.swing.JTextField();
-        txtFieldLibros = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtFieldLibros = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtFieldPrestamos = new javax.swing.JTextArea();
         jPoperaciones = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         rbRegistrarDevolucion = new javax.swing.JRadioButton();
@@ -72,37 +71,51 @@ public class FrmBiblioteca extends javax.swing.JFrame {
         lblUsuario = new javax.swing.JLabel();
         bttnMostrar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setText("GESTION DE BIBLIOTECA");
 
+        jLabel1.setText("La biblioteca tiene los libros siguientes: ");
+
+        jLabel3.setText("Personas utilizando la biblioteca: ");
+
+        txtFieldLibros.setColumns(20);
+        txtFieldLibros.setRows(5);
+        jScrollPane1.setViewportView(txtFieldLibros);
+
+        txtFieldPrestamos.setColumns(20);
+        txtFieldPrestamos.setRows(5);
+        jScrollPane2.setViewportView(txtFieldPrestamos);
+
         javax.swing.GroupLayout jPSubFramesLayout = new javax.swing.GroupLayout(jPSubFrames);
         jPSubFrames.setLayout(jPSubFramesLayout);
         jPSubFramesLayout.setHorizontalGroup(
             jPSubFramesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPSubFramesLayout.createSequentialGroup()
-                .addContainerGap(315, Short.MAX_VALUE)
-                .addComponent(txtFieldPrestamos, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
-            .addGroup(jPSubFramesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPSubFramesLayout.createSequentialGroup()
-                    .addGap(45, 45, 45)
-                    .addComponent(txtFieldLibros, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(310, Short.MAX_VALUE)))
+            .addGroup(jPSubFramesLayout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addGroup(jPSubFramesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGroup(jPSubFramesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(56, 56, 56))
         );
         jPSubFramesLayout.setVerticalGroup(
             jPSubFramesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPSubFramesLayout.createSequentialGroup()
-                .addContainerGap(46, Short.MAX_VALUE)
-                .addComponent(txtFieldPrestamos, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
-            .addGroup(jPSubFramesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPSubFramesLayout.createSequentialGroup()
-                    .addContainerGap(47, Short.MAX_VALUE)
-                    .addComponent(txtFieldLibros, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(33, 33, 33)))
+                .addContainerGap(24, Short.MAX_VALUE)
+                .addGroup(jPSubFramesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
+                .addGroup(jPSubFramesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
+                .addGap(35, 35, 35))
         );
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -138,7 +151,7 @@ public class FrmBiblioteca extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(32, 32, 32)
                 .addComponent(rbAgregarLibro)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(rbRegistrarPrestamo)
                 .addGap(52, 52, 52)
                 .addComponent(rbRegistrarDevolucion)
@@ -194,22 +207,22 @@ public class FrmBiblioteca extends javax.swing.JFrame {
         jPEntradaValoresLayout.setVerticalGroup(
             jPEntradaValoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPEntradaValoresLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPEntradaValoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblLibro)
-                    .addComponent(txtLibro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(12, 12, 12)
                 .addGroup(jPEntradaValoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAutor)
                     .addComponent(txtAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPEntradaValoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblLibro)
+                    .addComponent(txtLibro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPEntradaValoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblUsuario)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        bttnMostrar.setText("Mostrar");
+        bttnMostrar.setText("Registrar y Mostrar");
         bttnMostrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bttnMostrarActionPerformed(evt);
@@ -232,8 +245,8 @@ public class FrmBiblioteca extends javax.swing.JFrame {
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(295, 295, 295)
-                .addComponent(bttnMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(284, 284, 284)
+                .addComponent(bttnMostrar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -330,15 +343,11 @@ public class FrmBiblioteca extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bttnMostrarActionPerformed
     private void updateListaLibros() {
-//       modeloLibros.clear();
-//       modeloLibros.addElement(libreria.getBooksString());
-    txtFieldLibros.setText(libreria.getBooksString());
+        txtFieldLibros.setText(libreria.getBooksString());
 
    }
 
    private void updateListaPrestamos() {
-//       modeloPrestamos.clear();
-//       modeloPrestamos.addElement(libreria.getPeopleString());
         txtFieldPrestamos.setText(libreria.getPeopleString());
    }
 
@@ -381,10 +390,14 @@ public class FrmBiblioteca extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bttnGroupOperaciones;
     private javax.swing.JButton bttnMostrar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPEntradaValores;
     private javax.swing.JPanel jPSubFrames;
     private javax.swing.JPanel jPoperaciones;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblAutor;
     private javax.swing.JLabel lblLibro;
     private javax.swing.JLabel lblTitulo;
@@ -393,8 +406,8 @@ public class FrmBiblioteca extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbRegistrarDevolucion;
     private javax.swing.JRadioButton rbRegistrarPrestamo;
     private javax.swing.JTextField txtAutor;
-    private javax.swing.JTextField txtFieldLibros;
-    private javax.swing.JTextField txtFieldPrestamos;
+    private javax.swing.JTextArea txtFieldLibros;
+    private javax.swing.JTextArea txtFieldPrestamos;
     private javax.swing.JTextField txtLibro;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables

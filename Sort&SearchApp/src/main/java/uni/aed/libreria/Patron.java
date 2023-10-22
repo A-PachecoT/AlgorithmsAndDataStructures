@@ -16,10 +16,17 @@ public class Patron {
     }
     public void display() {
         if( !books.isEmpty()) {
-            System.out.println(name + "tiene los libros siguientes:");
+            System.out.println(name + " tiene los libros siguientes:");
             books.display( );
         }
 
-        else System.out.print(name + "no tiene libros");
+        else System.out.print(name + " no tiene libros");
+    }
+    @Override
+    public String toString() {
+        if( !books.isEmpty()) {
+            return name + " tiene: \n" + books.toString();
+        }
+        else return name + " no tiene libros";
     }
 }  

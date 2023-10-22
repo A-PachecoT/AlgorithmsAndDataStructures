@@ -19,10 +19,10 @@ public class Library {
     private PatronList[] people = new PatronList[(int)('Z' + 1)];
     
     // Instancia el buffer para leer datos de la terminal y guardarlos en input
-    private String input;
-
-    private BufferedReader buffer = new BufferedReader(
-                                    new InputStreamReader ( System. in) ) ;
+//    private String input;
+//
+//    private BufferedReader buffer = new BufferedReader(
+//                                    new InputStreamReader ( System. in) ) ;
     
     
     private final String strErrorAuthor         = "Nombre de autor mal escrito";
@@ -46,14 +46,14 @@ public class Library {
     Muestra un mensaje al usuario, lee una cadena desde la consola 
     y la devuelve con la primera letra en mayúsculas.
     */
-    private String getString(String msg) {
-        System.out.print(msg + " ");
-        System.out.flush();
-        try { // Intenta leer y almacenar en input una linea de la terminal
-            input = buffer.readLine();
-        }catch (IOException io){
-            
-        }
+    private String getString(String input) {
+//        System.out.print(msg + " ");
+//        System.out.flush();
+//        try { // Intenta leer y almacenar en input una linea de la terminal
+//            input = buffer.readLine();
+//        }catch (IOException io){
+//            
+//        }
         // retorna la string leida con la primera letra en mayuscula
         return input.substring(0,1).toUpperCase() + input.substring(1);
     }
@@ -84,33 +84,27 @@ public class Library {
     Método que genera una cadena con la lista de libros en el catálogo.
     */
     public String getBooksString() {
-        StringBuilder booksString = new StringBuilder("La biblioteca tiene los libros siguientes:\n\n");
-        for (int i = (int) 'A'; i <= (int) 'Z'; i++) { // Se itera desde la A hasta la Z
-            // Se añade a la cadena el libro del catálogo si no es vacío
-            if (!catalog[i].isEmpty()) {
-                // Suponemos que AuthorList tiene un método toString adecuado
-                String authorAndBooks = catalog[i].toString(); 
-                booksString.append(authorAndBooks).append("\n");
-            }
+        String text = "";
+        for (int i = (int) 'A'; i <= (int) 'Z'; i++){ // Se itera desde la A hasta la Z
+            // Se imprime el libro del catalogo si no es vacio
+            if (!catalog[i].isEmpty())
+                text += catalog[i].toString();
         }
-        return booksString.toString();
+        return text;
     }
 
     /*
     Método que genera una cadena con la lista de personas que utilizan la biblioteca.
     */
     public String getPeopleString() {
-        StringBuilder peopleString = new StringBuilder("\nLas personas siguientes están utilizando la biblioteca:\n\n");
-        for (int i = (int) 'A'; i <= (int) 'Z'; i++) { // Se itera desde la A hasta la Z
-            // Se añade a la cadena la lista de personas si no es vacía
-            if (!people[i].isEmpty()) {
-                // Suponemos que PatronList tiene un método toString adecuado
-                String personAndBooks = people[i].toString();
-                peopleString.append(personAndBooks).append("\n");
-            }
+        String text = "";
+        for (int i = (int) 'A'; i <= (int) 'Z'; i++){ // Se itera desde la A hasta la Z
+            if (!people[i].isEmpty())
+                text += people[i].toString();
         }
-        return peopleString.toString();
+        return text;
     }
+
 
 
     // Permite al usuario agregar un libro a la biblioteca, asociándolo con un autor.
@@ -119,10 +113,8 @@ public class Library {
         int oldAuthor; // indice
         Book newBook = new Book( ) ;
         
-//        newAuthor.name = getString( "Introduzca eI nombre del autor:" ) ;
-//        newBook.title = getString( "Introduzca eI título del libro: ") ;
-        newAuthor.name = name.toUpperCase();
-        newBook.title = title.toUpperCase();
+        newAuthor.name = getString(name);
+        newBook.title = getString(title);
         
         // Se recupera la posicion del indice segun la primera letra, en el catalogo
         // del autor al cual se le quiere anexar un nuevo libro
@@ -158,14 +150,13 @@ public class Library {
         //Si los indices mantienen en -1 se vuelve a solicitar al usuario
         
         // Recibe nombre de usuario
-//        patron.name = getString("Introduzca el nombre del usuario:");
-        patron.name = namePatron.toUpperCase();
+        patron.name = getString(namePatron);
         
         // Recibe nombre de autor
         while (authorIndex == -1) {
             // Comprueba que exista en el catalogo
 //            author.name = getString("Introduzca el nombre del autor:");
-            author.name = nameAuthor.toUpperCase();
+            author.name = getString(nameAuthor);
             authorIndex = catalog [ (int)
                         author.name.charAt(0)].indexOf(author);
 
@@ -179,7 +170,7 @@ public class Library {
         // Recibe nombre de titulo
         while (bookIndex == -1) {
 //            book.title = getString("Introduzca el título del libro: ");
-            book.title = nameBook.toUpperCase();
+            book.title = getString(nameBook);
             // Se hace uso del indice del autor calculado previamente para el respectivo acceso
             authorRef = (Author) catalog[(int)
                         author.name.charAt(0)].get(authorIndex);
@@ -202,7 +193,8 @@ public class Library {
         if(patronIndex == -1) { // Un usuaraio nuevo en la biblioteca
             // Agrega la persona a la lista de la posición de su primera letra
             // del nombre a la LinkedList people
-            people[(int) patron.name.charAt(0)].add(patron);
+            patron.books.add(bookToCheckOut);
+            people[(int) patron.name.charAt(0)].add(patron); // Crea el perfil
             bookRef.patron = (Patron) people [(int)
                     patron.name.charAt(0)].get(0); // ANTES: getFirst
         }
@@ -224,7 +216,7 @@ public class Library {
         int patronIndex = -1, bookIndex = -1, authorIndex = -1;
 
         // Se pide y verifica el nombre del usuario que solicita devolverlo
-        patron.name = namePatron.toUpperCase();
+        patron.name = getString(namePatron);
         patronIndex = people[(int) patron.name.charAt(0)].indexOf(patron);
         
         if (patronIndex == -1) {
@@ -233,7 +225,7 @@ public class Library {
         }
 
         // Recibe nombre de autor
-        author.name = nameAuthor.toUpperCase();
+        author.name = getString(nameAuthor);
         authorIndex = catalog[(int) author.name.charAt(0)].indexOf(author);
 
         if (authorIndex == -1) {
@@ -242,7 +234,7 @@ public class Library {
         }
 
         // Recibe nombre de título
-        book.title = bookTitle.toUpperCase();
+        book.title = getString(bookTitle);
         // Se hace uso del índice del autor calculado previamente para el respectivo acceso
         authorRef = (Author) catalog[(int) author.name.charAt(0)].get(authorIndex);
         bookIndex = authorRef.books.indexOf(book);
@@ -321,7 +313,7 @@ public class Library {
 
     }
     public static void main(String args[]) {
-        (new Library()).run();
+//        (new Library()).run();
     }
 
 }

@@ -24,10 +24,10 @@ public class AuthorList extends LinkedListTDA<Author>{
     
     @Override
     public String toString() {
-        StringBuilder output = new StringBuilder();
+        String output = "";
         for (int i = 0; i < size(); i++) {
-            output.append(get(i).toString()).append("\n");
+            output += (((Author)get(i)).toString()) + ("\n");
         }
-        return output.toString();
+        return output;
     }
 }

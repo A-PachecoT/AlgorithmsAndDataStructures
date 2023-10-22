@@ -22,4 +22,10 @@ public class Author {
         System.out.println(name);
         books.display();
     }
+    
+    public String toString( ) {
+        // Se escribe el nombre y libros en pantalla
+        return name + "\n" + books.toString();
+    }
+
 }

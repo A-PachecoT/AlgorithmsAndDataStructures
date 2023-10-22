@@ -41,7 +41,7 @@ public class FrmMain extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
 
         jMenu3.setText("jMenu3");
 
@@ -136,14 +136,14 @@ public class FrmMain extends javax.swing.JFrame {
 
         jMenu2.setText("Biblioteca");
 
-        jCheckBoxMenuItem1.setSelected(true);
-        jCheckBoxMenuItem1.setText("Gestión de Biblioteca");
-        jCheckBoxMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem5.setText("Gestión de Biblioteca");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxMenuItem1ActionPerformed(evt);
+                jMenuItem5ActionPerformed(evt);
             }
         });
-        jMenu2.add(jCheckBoxMenuItem1);
+        jMenu2.add(jMenuItem5);
 
         jMenuBar1.add(jMenu2);
 
@@ -205,10 +205,10 @@ public class FrmMain extends javax.swing.JFrame {
         v.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
-    private void jCheckBoxMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem1ActionPerformed
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         FrmBiblioteca  v = new FrmBiblioteca();
         v.setVisible(true);
-    }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -246,7 +246,6 @@ public class FrmMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -255,6 +254,7 @@ public class FrmMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenu jmBigNumbers;
     private javax.swing.JMenu jmLinkedLists;
     private javax.swing.JMenu jmSortAndSearch;
