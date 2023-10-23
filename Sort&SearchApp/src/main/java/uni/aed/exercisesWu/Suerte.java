@@ -10,13 +10,14 @@ package uni.aed.exercisesWu;
  */
 import java.util.Scanner;
 import java.util.Random;
+import uni.aed.linkedListADT.LinkedListTDA;
 import uni.aed.list.ListaEnlazada;
 import uni.aed.list.Nodo;
 
 public class Suerte {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ListaEnlazada suertes = new ListaEnlazada();
+        LinkedListTDA<String> suertes = new LinkedListTDA<String>();
 
         System.out.println("Ingrese el número N de suertes:");
         int n = sc.nextInt();
@@ -24,23 +25,19 @@ public class Suerte {
 
         for (int i = 0; i < n; i++) {
             System.out.println("Ingrese suerte " + (i + 1) + ":");
-            suertes.addLast(sc.nextLine());
+            suertes.add(sc.nextLine());
         }
 
         String respuesta;
         Random rand = new Random();
 
         do {
-            System.out.println("¿Desea desplegar una suerte? (sí/no):");
+            System.out.println("¿Desea desplegar una suerte? (si/no):");
             respuesta = sc.nextLine().trim().toLowerCase();
 
-            if ("sí".equals(respuesta)) {
+            if ("si".equals(respuesta)) {
                 int indiceAleatorio = rand.nextInt(n);
-                Nodo actual = suertes.head;
-                for (int i = 0; i < indiceAleatorio; i++) {
-                    actual = actual.next;
-                }
-                System.out.println("Tu suerte es: " + actual.data);
+                System.out.println("Tu suerte es: " + suertes.get(indiceAleatorio));
             }
 
         } while (!"no".equals(respuesta));

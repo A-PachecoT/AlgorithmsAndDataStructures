@@ -4,10 +4,6 @@
  */
 package uni.aed.libreria;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
 /**
  *
  * @author AndreP
